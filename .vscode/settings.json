@@ -1,0 +1,12 @@
+{
+  "typescript.tsdk": "./front-ts/node_modules/typescript/lib",
+  "javascript.format.semicolons": "insert",
+  "typescript.format.semicolons": "insert",
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "prettier.semi": true,
+  "prettier.quoteProps": "consistent",
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true
+}
