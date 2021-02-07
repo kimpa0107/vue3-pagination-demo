@@ -1,9 +1,14 @@
-const success = (data = null) => {
-  return common(0, 'OK', data);
+const success = (ctx, data = null) => {
+  responseWithCtx(ctx, 0, 'OK', data);
 };
 
-const fail = (errcode, errmsg) => {
-  return common(errcode, errmsg, null);
+const fail = (ctx, errcode, errmsg) => {
+  responseWithCtx(ctx, errcode, errmsg, null);
+};
+
+const responseWithCtx = (ctx, errcode, errmsg, data) => {
+  ctx.header['Content-Type'] = 'application/json';
+  ctx.body = common(errcode, errmsg, data);
 };
 
 const common = (errcode, errmsg, data = null) => {

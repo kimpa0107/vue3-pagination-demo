@@ -12,7 +12,10 @@ router.get('/articles', async (ctx, next) => {
   const PAGE_SIZE = 10;
   const TOTAL_COUNT = 110;
   const totalPages = Math.ceil(TOTAL_COUNT / PAGE_SIZE);
-  const page = ~~ctx.query.page;
+  let page = ~~ctx.query.page;
+  if (page <= 0) {
+    page = 1;
+  }
   const pagination = {
     page,
     page_size: PAGE_SIZE,
@@ -20,7 +23,7 @@ router.get('/articles', async (ctx, next) => {
   };
 
   if (page > totalPages) {
-    ctx.body = response.success({
+    response.success(ctx, {
       items: [],
       pagination,
     });
@@ -40,12 +43,12 @@ router.get('/articles', async (ctx, next) => {
       id: num,
       title: `This is article title - ${num}`,
     });
-    ctx.header['content-type'] = 'application/json';
-    ctx.body = response.success({
-      items: articles,
-      pagination,
-    });
   }
+
+  response.success(ctx, {
+    items: articles,
+    pagination,
+  });
 });
 
 app.use(router.routes()).listen(3001);
